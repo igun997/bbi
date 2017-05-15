@@ -28,20 +28,20 @@ class Ajax extends CI_Controller {
             }
             if($jk == 1)
             {
-                $basal = 30;
+                $basal = 0.30;
             }else{
-                $basal = 25;
+                $basal = 0.25;
             }
            $tb = $this->input->post("tb");    
            $bb = $this->input->post("bb");    
            $beratIdeal = ($tb-100)-(0.10*($tb-100));
            $jBasal = $beratIdeal*$basal;
-           $jKS = (($aktifitas*$jBasal)/100)*$jBasal;
+           $jKS = $basal*$jBasal;
            if($umur > 40)
            {
-               $jKU =  $umur-((5*$umur)/100)  ;
+               $jKU =  $umur-0.05  ;
            }else{
-               $jKU =  $umur*((5*$umur)/100) ;
+               $jKU =  $umur*0.05 ;
            }
             $totalKkal = $jBasal+$jKS-$jKU; 
            $html = "<p>Hasil Perhitungan</p>
@@ -57,11 +57,11 @@ class Ajax extends CI_Controller {
                         <p>Koreksi Umur   : ".$jKU."</p>
                         <p>Jumlah Kalori Sehari - Hari   : ".$totalKkal." Kkal</p>
                         <p><b>Komposisi Makan Sehari :</b>   : </p>
-                        <p>Pagi   : ".((20*$totalKkal)/100)*$totalKkal." Kalori</p>
-                        <p>Siang   : ".((30*$totalKkal)/100)*$totalKkal." Kalori</p>
-                        <p>Sore   : ".((25*$totalKkal)/100)*$totalKkal." Kalori</p>
-                        <p>Snack Pagi   :".((10*$totalKkal)/100)*$totalKkal." Kalori </p>
-                        <p>Snack Sore   : ".((15*$totalKkal)/100)*$totalKkal." Kalori</p>";
+                        <p>Pagi   : ".(0.20*$totalKkal)." Kalori</p>
+                        <p>Siang   : ".(0.30*$totalKkal)." Kalori</p>
+                        <p>Sore   : ".(0.25*$totalKkal)." Kalori</p>
+                        <p>Snack Pagi   :".(0.10*$totalKkal)." Kalori </p>
+                        <p>Snack Sore   : ".(0.15*$totalKkal)." Kalori</p>";
             echo $html;
         }else{
             show_404();
